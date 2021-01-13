@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  
   describe "タスクモデルのバリデーションテスト" do
-    
     it "[有効]タスクが有効である事"  do
       task = FactoryBot.build(:task)
       expect(task).to be_valid
@@ -34,5 +32,4 @@ RSpec.describe Task, type: :model do
       expect(othertask.errors[:title]).to include("has already been taken")
     end
   end
-  
 end
