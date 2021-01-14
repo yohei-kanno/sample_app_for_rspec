@@ -16,20 +16,20 @@ RSpec.describe Task, type: :model do
     end
     
     it "[無効]タスクにタイトルが無い事" do
-      task = build(:task,title: nil)
+      task = build(:task, title: nil)
       expect(task).to be_invalid
       expect(task.errors[:title]).to include("can't be blank")
     end
     
     it "[無効]タスクにステータスが選択されていない事" do
-      task = build(:task,status: nil)
+      task = build(:task, status: nil)
       expect(task).to be_invalid
       expect(task.errors[:status]).to include("can't be blank")
     end
     
     it "[無効]タイトルが既に存在する事" do
       task = create(:task)
-      othertask = build(:task,title: task.title)
+      othertask = build(:task, title: task.title)
       expect(othertask).to be_invalid
       expect(othertask.errors[:title]).to include("has already been taken")
     end
