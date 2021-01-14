@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
+  
   let(:user){ create(:user) }
-  let(:other_user){ vcreate(:user) }
+  let(:other_user){ create(:user) }
   let(:task){ build(:task, user: user) }
   
   include Login
@@ -32,7 +33,6 @@ RSpec.describe 'Users', type: :system do
         end
       end
           
-          
       context '登録済のメールアドレスを使用' do
         it 'ユーザーの新規作成が失敗する' do
           user
@@ -45,7 +45,7 @@ RSpec.describe 'Users', type: :system do
         end
       end
     end
-
+          
     describe 'マイページ' do
       context 'ログインしていない状態' do
         it 'マイページへのアクセスが失敗する' do
@@ -57,7 +57,6 @@ RSpec.describe 'Users', type: :system do
     end
   end
 
-          
 
   describe 'ログイン後' do
     before do
