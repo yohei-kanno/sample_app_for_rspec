@@ -4,7 +4,7 @@ RSpec.describe 'Users', type: :system do
   
   let(:user){ create(:user) }
   let(:other_user){ create(:user) }
-  let(:task){ build(:task, user: user) }
+  let(:task){ create(:task,user: user) }
   
   include Login
   
@@ -96,6 +96,21 @@ RSpec.describe 'Users', type: :system do
           visit edit_user_path(other_user)
           expect(current_path).to eq(user_path(user))
           expect(page).to have_content("Forbidden access.")
+        end
+      end
+    end
+    
+    describe 'マイページ' do
+      context 'タスクを作成' do
+        it '新規作成したタスクが表示される' do
+          task
+          visit user_path(user)
+          expect(page).to have_content('You have 1 task.')
+          expect(page).to have_content(task.title)
+          expect(page).to have_content(task.status)
+          expect(page).to have_link('Show')
+          expect(page).to have_link('Edit')
+          expect(page).to have_link('Destroy')
         end
       end
     end
