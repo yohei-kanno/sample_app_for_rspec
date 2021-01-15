@@ -8,7 +8,7 @@ RSpec.describe 'UserSessions', type: :system do
   
   describe 'ログイン前' do
     context 'フォームの入力値が正常' do
-      it 'ログイン処理が成功する' do
+      it 'ログイン処理が成功すること' do
         visit login_path
         fill_in 'Email', with: user.email
         fill_in 'Password', with: "foobar"
@@ -18,7 +18,7 @@ RSpec.describe 'UserSessions', type: :system do
       end
     end
     context 'Emailフォームが未入力' do
-      it 'ログイン処理が失敗する' do
+      it 'ログイン処理が失敗すること' do
         visit login_path
         fill_in 'Email', with: nil
         fill_in 'Password', with: "foobar"
@@ -29,7 +29,7 @@ RSpec.describe 'UserSessions', type: :system do
     end
     
     context 'Passwordフォームが未入力' do
-      it 'ログイン処理が失敗する' do
+      it 'ログイン処理が失敗すること' do
         visit login_path
         fill_in 'Email', with: user.email
         fill_in 'Password', with: nil
@@ -42,7 +42,7 @@ RSpec.describe 'UserSessions', type: :system do
 
   describe 'ログイン後' do
     context 'ログアウトボタンをクリック' do
-      it 'ログアウト処理が成功する' do
+      it 'ログアウト処理が成功すること' do
         sign_in user
         click_link "Logout"
         expect(current_path).to eq(root_path)

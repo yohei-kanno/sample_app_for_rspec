@@ -11,7 +11,7 @@ RSpec.describe 'Users', type: :system do
   describe 'ログイン前' do
     describe 'ユーザー新規登録' do
       context 'フォームの入力値が正常' do
-        it 'ユーザーの新規作成が成功する' do
+        it 'ユーザーの新規作成が成功すること' do
           visit  sign_up_path
           fill_in 'Email', with: "user@expample"
           fill_in 'Password', with: "foobar"
@@ -23,7 +23,7 @@ RSpec.describe 'Users', type: :system do
       end
       
       context 'メールアドレスが未入力' do
-        it 'ユーザーの新規作成が失敗する' do
+        it 'ユーザーの新規作成が失敗すること' do
           visit  sign_up_path
           fill_in 'Email', with: nil
           fill_in 'Password', with: "foobar"
@@ -34,7 +34,7 @@ RSpec.describe 'Users', type: :system do
       end
           
       context '登録済のメールアドレスを使用' do
-        it 'ユーザーの新規作成が失敗する' do
+        it 'ユーザーの新規作成が失敗すること' do
           user
           visit  sign_up_path
           fill_in 'Email', with: user.email
@@ -48,7 +48,7 @@ RSpec.describe 'Users', type: :system do
           
     describe 'マイページ' do
       context 'ログインしていない状態' do
-        it 'マイページへのアクセスが失敗する' do
+        it 'マイページへのアクセスが失敗すること' do
           visit user_path(user)
           expect(current_path).to eq(login_path)
           expect(page).to have_content("Login required")
@@ -64,7 +64,7 @@ RSpec.describe 'Users', type: :system do
     end
     describe 'ユーザー編集' do
       context 'フォームの入力値が正常' do
-        it 'ユーザーの編集が成功する' do
+        it 'ユーザーの編集が成功すること' do
           visit edit_user_path(user)
           fill_in 'Email',with: user.email
           click_button 'Update'
@@ -74,7 +74,7 @@ RSpec.describe 'Users', type: :system do
       end
           
       context 'メールアドレスが未入力' do
-        it 'ユーザーの編集が失敗する' do
+        it 'ユーザーの編集が失敗すること' do
           visit edit_user_path(user)
           fill_in 'Email',with: nil
           click_button 'Update'
@@ -83,7 +83,7 @@ RSpec.describe 'Users', type: :system do
       end
         
       context '登録済のメールアドレスを使用' do
-        it 'ユーザーの編集が失敗する' do
+        it 'ユーザーの編集が失敗すること' do
           visit edit_user_path(user)
           fill_in 'Email',with: other_user.email
           click_button 'Update'
@@ -92,7 +92,7 @@ RSpec.describe 'Users', type: :system do
       end
       
       context '他ユーザーの編集ページにアクセス' do
-        it '編集ページへのアクセスが失敗する' do
+        it '編集ページへのアクセスが失敗すること' do
           visit edit_user_path(other_user)
           expect(current_path).to eq(user_path(user))
           expect(page).to have_content("Forbidden access.")
@@ -102,7 +102,7 @@ RSpec.describe 'Users', type: :system do
     
     describe 'マイページ' do
       context 'タスクを作成' do
-        it '新規作成したタスクが表示される' do
+        it '新規作成したタスクが表示されること' do
           task
           visit user_path(user)
           expect(page).to have_content('You have 1 task.')

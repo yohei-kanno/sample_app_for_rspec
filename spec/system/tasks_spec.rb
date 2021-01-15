@@ -11,7 +11,7 @@ RSpec.describe 'Tasks', type: :system do
     before { sign_in user }
     describe '自分の作成したタスクの場合' do
       context 'タスクに入力値が有効である場合' do
-        it 'タスクの作成が成功する事' do
+        it 'タスクの作成が成功すること' do
           visit new_task_path
           fill_in "Title",  with: "test"
           fill_in "Content", with: "test"
@@ -23,8 +23,8 @@ RSpec.describe 'Tasks', type: :system do
         end
       end
       
-      context 'タスクにタイトルが入力されていない事' do
-        it 'タスクの登録に失敗する事' do
+      context 'タスクにタイトルが入力されていないこと' do
+        it 'タスクの登録に失敗すること' do
           visit new_task_path
           fill_in "Title",  with: nil
           fill_in "Content", with: "test"
@@ -34,8 +34,8 @@ RSpec.describe 'Tasks', type: :system do
         end
       end
       
-      context '重複したタイトルが存在する事' do
-        it 'タスクの登録に失敗する事' do
+      context '重複したタイトルが存在すること' do
+        it 'タスクの登録に失敗すること' do
           task
           visit new_task_path
           fill_in "Title",  with: task.title
@@ -48,7 +48,7 @@ RSpec.describe 'Tasks', type: :system do
       end
       
       context '一覧画面' do
-        it "編集と削除リンクがある事" do
+        it "編集と削除リンクがあること" do
           task
           visit tasks_path
           expect(page).to have_link("Edit")
@@ -57,7 +57,7 @@ RSpec.describe 'Tasks', type: :system do
       end
       
       context '編集画面' do
-        it 'タスクの編集が成功する事' do
+        it 'タスクの編集が成功すること' do
           visit edit_task_path(task)
           fill_in "Title",  with: task.title
           fill_in "Content", with: task.content
@@ -71,7 +71,7 @@ RSpec.describe 'Tasks', type: :system do
       end
       
       context 'タスクの削除' do
-        it "タスクの削除が成功する事" do
+        it "タスクの削除が成功すること" do
           task
           visit tasks_path
           click_link 'Destroy'
@@ -89,7 +89,7 @@ RSpec.describe 'Tasks', type: :system do
       let!(:other_task){ create(:task, user: other_user) }
       
       context '一覧画面' do
-        it "編集と削除リンクが無い事" do
+        it "編集と削除リンクが無いこと" do
           visit tasks_path
           expect(page).to_not have_link("Edit")
           expect(page).to_not have_link("Destroy")
@@ -97,7 +97,7 @@ RSpec.describe 'Tasks', type: :system do
       end
           
       context '編集画面' do
-        it '編集画面への遷移に失敗する事' do
+        it '編集画面への遷移に失敗すること' do
           visit edit_task_path(other_task)
           expect(current_path).to eq(root_path)
           expect(page).to have_content("Forbidden access.")
@@ -108,14 +108,14 @@ RSpec.describe 'Tasks', type: :system do
   
   describe 'ログインしていない場合' do
     context 'タスク新規作成画面' do
-      it 'ログイン画面にリダイレクトされる事' do
+      it 'ログイン画面にリダイレクトされること' do
         visit new_task_path
         expect(current_path).to eq(login_path)
         expect(page).to have_content("Login required")
       end
     end
     context 'タスク編集画面' do
-      it 'ログイン画面にリダイレクトされる事' do
+      it 'ログイン画面にリダイレクトされること' do
         visit edit_task_path(user)
         expect(current_path).to eq(login_path)
         expect(page).to have_content("Login required")
