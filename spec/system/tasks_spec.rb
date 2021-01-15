@@ -5,8 +5,6 @@ RSpec.describe 'Tasks', type: :system do
   let(:user){ create(:user) }
   let(:task){ create(:task,user: user) }
   
-  include Login
-  
   describe 'ログインしている場合' do
     before { sign_in user }
     describe '自分の作成したタスクの場合' do
